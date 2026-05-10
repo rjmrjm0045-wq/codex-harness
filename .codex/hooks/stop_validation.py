@@ -21,6 +21,10 @@ def main() -> int:
         payload = {}
 
     cwd = Path(payload.get("cwd") or ".").resolve()
+    if payload.get("stop_hook_active"):
+        continue_ok()
+        return 0
+
     package_json = cwd / "package.json"
 
     if not package_json.exists():
