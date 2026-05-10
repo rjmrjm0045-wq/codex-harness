@@ -1,0 +1,4 @@
+interface:
+  display_name: "Harness Review"
+  short_description: "Review changes against harness guardrails"
+  default_prompt: "Use $harness-review to review the current changes against project guardrails."

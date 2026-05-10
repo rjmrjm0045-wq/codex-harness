@@ -1,0 +1,40 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "^Bash$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"& { `$root = git rev-parse --show-toplevel; & (Join-Path `$root '.codex/hooks/run_hook.ps1') 'pre_tool_use_policy.py' }\"",
+            "timeout": 30,
+            "statusMessage": "Checking shell command policy"
+          }
+        ]
+      },
+      {
+        "matcher": "^apply_patch$|Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"& { `$root = git rev-parse --show-toplevel; & (Join-Path `$root '.codex/hooks/run_hook.ps1') 'tdd_guard.py' }\"",
+            "timeout": 30,
+            "statusMessage": "Checking TDD guard"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"& { `$root = git rev-parse --show-toplevel; & (Join-Path `$root '.codex/hooks/run_hook.ps1') 'stop_validation.py' }\"",
+            "timeout": 420,
+            "statusMessage": "Running project validation"
+          }
+        ]
+      }
+    ]
+  }
+}
