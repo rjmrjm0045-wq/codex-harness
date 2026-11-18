@@ -1,0 +1,4 @@
+interface:
+  display_name: "Windows Sleep Wake Fix"
+  short_description: "절전 후 로그인 화면 멈춤 예방 설정 적용"
+  default_prompt: "Use $windows-sleep-wake-fix to prevent the Windows lock screen from freezing after sleep."
